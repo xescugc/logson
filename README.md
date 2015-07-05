@@ -1,4 +1,7 @@
 # logson
+
+[![Build Status][travis-image]][travis-url]
+
 Simple middleware library to get the application logs (Express) and do whatever you want with them
 
 ## API
@@ -153,3 +156,6 @@ If you want to save the cookies and wrap the log into a `request` name use the f
 ## License
 
 [MIT](LICENSE)
+
+[travis-image]: https://travis-ci.org/XescuGC/logson.svg
+[travis-url]: https://travis-ci.org/XescuGC/logson
