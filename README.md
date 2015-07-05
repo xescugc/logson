@@ -34,6 +34,7 @@ With options:
 ```
 
 By default the format is the following:
+
 ```js
   {
     headers: {},
@@ -61,11 +62,9 @@ This options encapsulates the log object:
   })
 ```
 
-This option is called **BEFORE** the `extras`, so the extra fields will be at the same level as the `parent`, which is the root.
-
 #### extras
 
-With this option you can add extra fields to the JSON log, when extras are defined you can have access to the req and res objects:
+With this option you can add extra fields to the JSON log, when extras are defined you can have access to the `req` and `res` objects:
 
 ```js
   var logson = require('logson');
@@ -82,6 +81,8 @@ With this option you can add extra fields to the JSON log, when extras are defin
     // The log object has the cookies field on it
   })
 ```
+
+Extras use a deepmerge methologi so the object returned with it will be merged with the log.
 
 #### override
 

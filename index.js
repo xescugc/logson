@@ -1,3 +1,4 @@
+var merge = require('deepmerge');
 module.exports = function(options, cb) {
 
 
@@ -22,15 +23,13 @@ module.exports = function(options, cb) {
         log = setParent(parent, log);
 
       if (extras) {
-        var extraFields = extras(req, res);
-        setExtras(extraFields, log);
+        log = merge(log, extras(req, res));
       }
 
       if (override) {
         log = {};
         if (extras) {
-          var extraFields = extras(req, res);
-          setExtras(extraFields, log);
+          log = merge(log, extras(req, res));
         }
       }
 
@@ -45,12 +44,6 @@ function setParent(parent, log) {
   log = {};
   log[parent] = content;
   return log;
-}
-
-function setExtras(extras, log) {
-  Object.keys(extras).forEach(function(c, i, a) {
-    log[c] = extras[c];
-  })
 }
 
 function generateLog(format, req, res) {

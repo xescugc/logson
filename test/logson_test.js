@@ -49,6 +49,26 @@ describe('Logson', function() {
       })
       result(req, res, nextFunction.bind(null, res));
     })
+    it('with extras in deep merge', function(done) {
+      var req = httpMocks.createRequest();
+      var res = httpMocks.createResponse({
+          eventEmitter: EventEmitter
+      });
+      var options = {
+        extras: function(req, res) {
+          return {
+            headers: {
+              cookies: req.cookies
+            }
+          }
+        }
+      }
+      var result = logson(options, function(log) {
+        expect(log).to.eql({ headers: {cookies: {}}, url: '', body: {}, query: {}});
+        done();
+      })
+      result(req, res, nextFunction.bind(null, res));
+    })
     describe('with override', function() {
       it('default', function(done) {
         var req = httpMocks.createRequest();
@@ -76,6 +96,27 @@ describe('Logson', function() {
         }
         var result = logson(options, function(log) {
           expect(log).to.eql({cookies: {}});
+          done();
+        })
+        result(req, res, nextFunction.bind(null, res));
+      })
+      it('extras in deep merge', function(done) {
+        var req = httpMocks.createRequest();
+        var res = httpMocks.createResponse({
+          eventEmitter: EventEmitter
+        });
+        var options = {
+          override: true,
+          extras: function(req, res) {
+            return {
+              headers: {
+                cookies: req.cookies
+              }
+            }
+          }
+        }
+        var result = logson(options, function(log) {
+          expect(log).to.eql({ headers: {cookies: {}}});
           done();
         })
         result(req, res, nextFunction.bind(null, res));
