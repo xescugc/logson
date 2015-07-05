@@ -4,7 +4,7 @@
   "description": "Simple middleware library to get the application logs (Express) and do whatever you want with them",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "make test"
   },
   "repository": {
     "type": "git",
