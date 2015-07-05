@@ -10,6 +10,11 @@
     "type": "git",
     "url": "https://github.com/XescuGC/logson"
   },
+  "files":[
+    "LICENSE",
+    "README.md",
+    "index.js"
+  ],
   "keywords": [
     "logs",
     "json"
