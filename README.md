@@ -1,6 +1,7 @@
 # logson
 
 [![Build Status][travis-image]][travis-url]
+[![Gitter][gitter-image]][gitter-url]
 
 Simple middleware library to get the application logs (Express) and do whatever you want with them
 
@@ -159,3 +160,5 @@ If you want to save the cookies and wrap the log into a `request` name use the f
 
 [travis-image]: https://travis-ci.org/XescuGC/logson.svg
 [travis-url]: https://travis-ci.org/XescuGC/logson
+[gitter-image]: https://badges.gitter.im/Join%20Chat.svg
+[gitter-url]: https://gitter.im/XescuGC/logson?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
