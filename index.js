@@ -1,6 +1,5 @@
 module.exports = function(options, cb) {
 
-  var format;
 
   if (typeof options === 'function') {
     cb = options;
@@ -13,9 +12,11 @@ module.exports = function(options, cb) {
 
   var override = options.override;
 
+  var format = options.format;
+
   return function(req, res, next) {
     res.on('finish', function() {
-      var log = generateLog(options.format, req, res);
+      var log = generateLog(format, req, res);
 
       if (parent)
         log = setParent(parent, log);
