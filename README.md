@@ -1,13 +1,13 @@
-#Logson
+# logson
 Simple middleware library to get the application logs (Express) and do whatever you want with them
 
-##API
+## API
 
 ```js
   var logson = require('logson');
 ```
 
-###logson(options|callback, [callback])
+### logson(options|callback, [callback])
 
 You can use it with options or without, in this case the first param will be the callback.
 
@@ -43,9 +43,9 @@ By default the format is the following:
   }
 ```
 
-###Options
+### Options
 
-####parent
+#### parent
 
 This options encapsulates the log object:
 
@@ -63,7 +63,7 @@ This options encapsulates the log object:
 
 This option is called **BEFORE** the `extras`, so the extra fields will be at the same level as the `parent`, which is the root.
 
-####extras
+#### extras
 
 With this option you can add extra fields to the JSON log, when extras are defined you can have access to the req and res objects:
 
@@ -83,7 +83,7 @@ With this option you can add extra fields to the JSON log, when extras are defin
   })
 ```
 
-####override
+#### override
 
 This option will disable all the logson formats, and will only add the `extra` fields:
 
@@ -99,6 +99,6 @@ This option will disable all the logson formats, and will only add the `extra` f
   })
 ```
 
-##License
+## License
 
 [MIT](LICENSE)
