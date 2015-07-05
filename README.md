@@ -82,7 +82,9 @@ With this option you can add extra fields to the JSON log, when extras are defin
   })
 ```
 
-Extras use a deepmerge methologi so the object returned with it will be merged with the log.
+`extras` use a deepmerge methology so the object returned with it will be merged with the log.
+
+**NOTE:** With `extras` you can override existing fields in the log object.
 
 #### override
 
@@ -97,6 +99,54 @@ This option will disable all the logson formats, and will only add the `extra` f
 
   logson(options, funciton(log) {
     // The log is {}
+  })
+```
+
+## Examples
+
+A simple Use Case for `logson` is to save the log object to the DB, for example elastic:
+
+```js
+  // Your elastic configuration
+  var elastic = require('./elastic');
+  var app = require('express')();
+
+  app.use(logson(function(log) {
+    elastic.create({
+      index: 'index',
+      type: 'type',
+      body: log
+    });
+  })
+```
+
+If you want to save the cookies and wrap the log into a `request` name use the following:
+
+```js
+  // All your app configuration
+  var cookieParser = require('cookie-parser');
+
+  app.use(cookieParser('pass'));
+
+  var conf = {
+    parent: 'request',
+    extras: function(req, res) {
+      return {
+        request: {
+          headers: {
+            cookeis: req.signedCookies
+          }
+        }
+      }
+    }
+  };
+
+  app.use(conf, logson(function(log) {
+    elastic.create({
+      index: 'index',
+      type: 'type',
+      body: log
+    });
   })
 ```
 
