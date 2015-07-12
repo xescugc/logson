@@ -11,8 +11,6 @@ module.exports = function(options, cb) {
 
   var parent = options.parent;
 
-  var override = options.override;
-
   var format = options.format;
 
   return function(req, res, next) {
@@ -24,13 +22,6 @@ module.exports = function(options, cb) {
 
       if (extras) {
         log = merge(log, extras(req, res));
-      }
-
-      if (override) {
-        log = {};
-        if (extras) {
-          log = merge(log, extras(req, res));
-        }
       }
 
       cb(log);

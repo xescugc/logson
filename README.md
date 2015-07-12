@@ -88,24 +88,6 @@ With this option you can add extra fields to the JSON log, when extras are defin
 
 `extras` use a deepmerge methology so the object returned with it will be merged with the log.
 
-**NOTE:** With `extras` you can override existing fields in the log object.
-
-#### override
-
-This option will disable all the logson formats, and will only add the `extra` fields:
-
-```js
-  var logson = require('logson');
-
-  var options = {
-    override: true
-  };
-
-  logson(options, funciton(log) {
-    // The log is {}
-  })
-```
-
 ## Examples
 
 A simple Use Case for `logson` is to save the log object to the DB, for example elastic:
