@@ -51,7 +51,7 @@ When you use `logson` it declares an attribute to the `req` object with the name
 
 #### format
 
-You can specify diferents types of log format:
+You can specify different types of log format:
 
 ##### combined
 
