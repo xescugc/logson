@@ -40,15 +40,48 @@ With options:
 By default the format is the following:
 
 ```js
-  {
-    headers: {},
-    url: '',
-    body: {},
-    query: {}
-  }
+  { }
 ```
 
+#### req.\_logson
+
+When you use `logson` it declares an attribute to the `req` object with the name `_logson`. You can set whatever you want to this attribute that will be merged to the final log.
+
 ### Options
+
+#### format
+
+You can specify diferents types of log format:
+
+##### combined
+
+```
+  ['remoteAddr', 'date', 'method', 'url', 'httpVersion', 'status', 'contentLength', 'referrer', 'userAgent']
+```
+
+##### common
+
+```
+  [ 'remoteAddr', 'date', 'method', 'httpVersion', 'status', 'contentLength']
+```
+
+##### dev
+
+```
+  [ 'method', 'status', 'responseTime', 'contentLength']
+```
+
+##### short
+
+```
+  [ 'remoteAddr', 'url', 'httpVersion', 'method', 'responseTime', 'contentLength' ]
+```
+
+##### tiny
+
+```
+  [ 'method', 'url', 'status', 'responseTime', 'contentLength' ]
+```
 
 #### parent
 
@@ -87,6 +120,12 @@ With this option you can add extra fields to the JSON log, when extras are defin
 ```
 
 `extras` use a deepmerge methology so the object returned with it will be merged with the log.
+
+### Merge order
+
+There are so many configurations that merge between them so the order is important, to no override fields.
+
+The ored of this merge is the following: ``log + parent + format + extras``
 
 ## Examples
 
