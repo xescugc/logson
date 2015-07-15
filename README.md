@@ -125,7 +125,7 @@ With this option you can add extra fields to the JSON log, when extras are defin
 
 There are so many configurations that merge between them so the order is important, to no override fields.
 
-The ored of this merge is the following: ``log + parent + format + extras``
+The ored of this merge is the following: ``req._logson + format + parent + extras``
 
 ## Examples
 

@@ -24,13 +24,13 @@ module.exports = function(options, cb) {
 
       setTime(res);
 
-      var log = generateLog(format, req, res);
-
-      if (parent)
-        log = setParent(parent, log);
+      var log = generateLog(req, res);
 
       if (format)
         log = formatLog(format, log, req, res);
+
+      if (parent)
+        log = setParent(parent, log);
 
       if (extras)
         log = merge(log, extras(req, res));
@@ -48,7 +48,7 @@ function setParent(parent, log) {
   return log;
 }
 
-function generateLog(format, req, res) {
+function generateLog(req, res) {
   return req._logson;
 }
 
