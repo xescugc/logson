@@ -1,6 +1,6 @@
 {
   "name": "logson",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple middleware library to get the application logs (Express) and do whatever you want with them",
   "main": "index.js",
   "scripts": {
