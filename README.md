@@ -5,6 +5,14 @@
 
 Simple middleware library to get the application logs (Express) and do whatever you want with them
 
+## Install
+
+With npm:
+
+```js
+  $> npm install --save logson
+```
+
 ## API
 
 ```js
@@ -16,25 +24,27 @@ Simple middleware library to get the application logs (Express) and do whatever 
 You can use it with options or without, in this case the first param will be the callback.
 
 ```js
+  var app = require('express')();
   var logson = require('logson');
 
-  logson(function(log) {
+  app.use(logson(function(log) {
     // Then you can use the log here
-  });
+  }));
 ```
 
 With options:
 
 ```js
+  var app = require('express')();
   var logson = require('logson');
 
   var options = {
     parent: 'parent'
   }
 
-  logson(options, function(log) {
+  app.use(logson(options, function(log) {
     // Then you can use the log here
-  })
+  }))
 ```
 
 By default the format is the following:
@@ -51,33 +61,33 @@ When you use `logson` it declares an attribute to the `req` object with the name
 
 #### format
 
-You can specify different types of log format:
+You can specify different types of log format (the array represents all the keys of the log):
 
-##### combined
+  * combined
 
 ```
   ['remoteAddr', 'date', 'method', 'url', 'httpVersion', 'status', 'contentLength', 'referrer', 'userAgent']
 ```
 
-##### common
+  * common
 
 ```
   [ 'remoteAddr', 'date', 'method', 'httpVersion', 'status', 'contentLength']
 ```
 
-##### dev
+  * dev
 
 ```
   [ 'method', 'status', 'responseTime', 'contentLength']
 ```
 
-##### short
+  * short
 
 ```
   [ 'remoteAddr', 'url', 'httpVersion', 'method', 'responseTime', 'contentLength' ]
 ```
 
-##### tiny
+  * tiny
 
 ```
   [ 'method', 'url', 'status', 'responseTime', 'contentLength' ]
