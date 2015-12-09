@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Logson by XescuGC</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Logson</h1>
+        <h2>Simple middleware library to get the application logs (Express) and do whatever you want with them</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/XescuGC/logson/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/XescuGC/logson/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/XescuGC/logson" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a id="logson" class="anchor" href="#logson" aria-hidden="true"><span class="octicon octicon-link"></span></a>logson</h1>
+
+<p><a href="https://travis-ci.org/XescuGC/logson"><img src="https://travis-ci.org/XescuGC/logson.svg" alt="Build Status"></a>
+<a href="https://gitter.im/XescuGC/logson?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Gitter"></a></p>
+
+<p>Simple middleware library to get the application logs (Express) and do whatever you want with them</p>
+
+<h2>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install</h2>
+
+<p>With npm:</p>
+
+<div class="highlight highlight-source-js"><pre>  $<span class="pl-k">&gt;</span> npm install <span class="pl-k">--</span>save logson</pre></div>
+
+<h2>
+<a id="api" class="anchor" href="#api" aria-hidden="true"><span class="octicon octicon-link"></span></a>API</h2>
+
+<div class="highlight highlight-source-js"><pre>  <span class="pl-k">var</span> logson <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>logson<span class="pl-pds">'</span></span>);</pre></div>
+
+<h3>
+<a id="logsonoptionscallback-callback" class="anchor" href="#logsonoptionscallback-callback" aria-hidden="true"><span class="octicon octicon-link"></span></a>logson(options|callback, [callback])</h3>
+
+<p>You can use it with options or without, in this case the first param will be the callback.</p>
+
+<div class="highlight highlight-source-js"><pre>  <span class="pl-k">var</span> app <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>express<span class="pl-pds">'</span></span>)();
+  <span class="pl-k">var</span> logson <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>logson<span class="pl-pds">'</span></span>);
+
+  <span class="pl-smi">app</span>.<span class="pl-en">use</span>(<span class="pl-en">logson</span>(<span class="pl-k">function</span>(<span class="pl-smi">log</span>) {
+    <span class="pl-c">// Then you can use the log here</span>
+  }));</pre></div>
+
+<p>With options:</p>
+
+<div class="highlight highlight-source-js"><pre>  <span class="pl-k">var</span> app <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>express<span class="pl-pds">'</span></span>)();
+  <span class="pl-k">var</span> logson <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>logson<span class="pl-pds">'</span></span>);
+
+  <span class="pl-k">var</span> options <span class="pl-k">=</span> {
+    parent<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>parent<span class="pl-pds">'</span></span>
+  }
+
+  <span class="pl-smi">app</span>.<span class="pl-en">use</span>(<span class="pl-en">logson</span>(options, <span class="pl-k">function</span>(<span class="pl-smi">log</span>) {
+    <span class="pl-c">// Then you can use the log here</span>
+  }))</pre></div>
+
+<p>By default the format is the following:</p>
+
+<div class="highlight highlight-source-js"><pre>  { }</pre></div>
+
+<h4>
+<a id="req_logson" class="anchor" href="#req_logson" aria-hidden="true"><span class="octicon octicon-link"></span></a>req._logson</h4>
+
+<p>When you use <code>logson</code> it declares an attribute to the <code>req</code> object with the name <code>_logson</code>. You can set whatever you want to this attribute that will be merged to the final log.</p>
+
+<h3>
+<a id="options" class="anchor" href="#options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Options</h3>
+
+<h4>
+<a id="format" class="anchor" href="#format" aria-hidden="true"><span class="octicon octicon-link"></span></a>format</h4>
+
+<p>You can specify different types of log format (the array represents all the keys of the log):</p>
+
+<ul>
+<li>combined</li>
+</ul>
+
+<pre><code>  ['remoteAddr', 'date', 'method', 'url', 'httpVersion', 'status', 'contentLength', 'referrer', 'userAgent']
+</code></pre>
+
+<ul>
+<li>common</li>
+</ul>
+
+<pre><code>  [ 'remoteAddr', 'date', 'method', 'httpVersion', 'status', 'contentLength']
+</code></pre>
+
+<ul>
+<li>dev</li>
+</ul>
+
+<pre><code>  [ 'method', 'status', 'responseTime', 'contentLength']
+</code></pre>
+
+<ul>
+<li>short</li>
+</ul>
+
+<pre><code>  [ 'remoteAddr', 'url', 'httpVersion', 'method', 'responseTime', 'contentLength' ]
+</code></pre>
+
+<ul>
+<li>tiny</li>
+</ul>
+
+<pre><code>  [ 'method', 'url', 'status', 'responseTime', 'contentLength' ]
+</code></pre>
+
+<h4>
+<a id="parent" class="anchor" href="#parent" aria-hidden="true"><span class="octicon octicon-link"></span></a>parent</h4>
+
+<p>This options encapsulates the log object:</p>
+
+<div class="highlight highlight-source-js"><pre>  <span class="pl-k">var</span> logson <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>logson<span class="pl-pds">'</span></span>);
+
+  <span class="pl-k">var</span> options <span class="pl-k">=</span> {
+    parent<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>parent<span class="pl-pds">'</span></span>
+  };
+
+  <span class="pl-en">logson</span>(options, <span class="pl-en">funciton</span>(<span class="pl-smi">log</span>) {
+    <span class="pl-c">// The log object is { parent: log }</span>
+  })</pre></div>
+
+<h4>
+<a id="extras" class="anchor" href="#extras" aria-hidden="true"><span class="octicon octicon-link"></span></a>extras</h4>
+
+<p>With this option you can add extra fields to the JSON log, when extras are defined you can have access to the <code>req</code> and <code>res</code> objects:</p>
+
+<div class="highlight highlight-source-js"><pre>  <span class="pl-k">var</span> logson <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>logson<span class="pl-pds">'</span></span>);
+
+  <span class="pl-k">var</span> options <span class="pl-k">=</span> {
+    <span class="pl-en">extras</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">req</span>, <span class="pl-smi">res</span>) {
+      <span class="pl-k">return</span> {
+        cookies<span class="pl-k">:</span> <span class="pl-smi">req</span>.<span class="pl-smi">cookies</span>
+      }
+    }
+  };
+
+  <span class="pl-en">logson</span>(options, <span class="pl-en">funciton</span>(<span class="pl-smi">log</span>) {
+    <span class="pl-c">// The log object has the cookies field on it</span>
+  })</pre></div>
+
+<p><code>extras</code> use a deepmerge methology so the object returned with it will be merged with the log.</p>
+
+<h3>
+<a id="merge-order" class="anchor" href="#merge-order" aria-hidden="true"><span class="octicon octicon-link"></span></a>Merge order</h3>
+
+<p>There are so many configurations that merge between them so the order is important, to no override fields.</p>
+
+<p>The ored of this merge is the following: <code>req._logson + format + parent + extras</code></p>
+
+<h2>
+<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h2>
+
+<p>A simple Use Case for <code>logson</code> is to save the log object to the DB, for example elastic:</p>
+
+<div class="highlight highlight-source-js"><pre>  <span class="pl-c">// Your elastic configuration</span>
+  <span class="pl-k">var</span> elastic <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>./elastic<span class="pl-pds">'</span></span>);
+  <span class="pl-k">var</span> app <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>express<span class="pl-pds">'</span></span>)();
+
+  <span class="pl-smi">app</span>.<span class="pl-en">use</span>(<span class="pl-en">logson</span>(<span class="pl-k">function</span>(<span class="pl-smi">log</span>) {
+    <span class="pl-smi">elastic</span>.<span class="pl-en">create</span>({
+      index<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>index<span class="pl-pds">'</span></span>,
+      type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>type<span class="pl-pds">'</span></span>,
+      body<span class="pl-k">:</span> log
+    });
+  })</pre></div>
+
+<p>If you want to save the cookies and wrap the log into a <code>request</code> name use the following:</p>
+
+<div class="highlight highlight-source-js"><pre>  <span class="pl-c">// All your app configuration</span>
+  <span class="pl-k">var</span> cookieParser <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>cookie-parser<span class="pl-pds">'</span></span>);
+
+  <span class="pl-smi">app</span>.<span class="pl-en">use</span>(<span class="pl-en">cookieParser</span>(<span class="pl-s"><span class="pl-pds">'</span>pass<span class="pl-pds">'</span></span>));
+
+  <span class="pl-k">var</span> conf <span class="pl-k">=</span> {
+    parent<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>request<span class="pl-pds">'</span></span>,
+    <span class="pl-en">extras</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">req</span>, <span class="pl-smi">res</span>) {
+      <span class="pl-k">return</span> {
+        request<span class="pl-k">:</span> {
+          headers<span class="pl-k">:</span> {
+            cookeis<span class="pl-k">:</span> <span class="pl-smi">req</span>.<span class="pl-smi">signedCookies</span>
+          }
+        }
+      }
+    }
+  };
+
+  <span class="pl-smi">app</span>.<span class="pl-en">use</span>(conf, <span class="pl-en">logson</span>(<span class="pl-k">function</span>(<span class="pl-smi">log</span>) {
+    <span class="pl-smi">elastic</span>.<span class="pl-en">create</span>({
+      index<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>index<span class="pl-pds">'</span></span>,
+      type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>type<span class="pl-pds">'</span></span>,
+      body<span class="pl-k">:</span> log
+    });
+  })</pre></div>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p><a href="LICENSE">MIT</a></p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
